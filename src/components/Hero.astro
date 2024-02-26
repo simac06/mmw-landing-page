@@ -1,6 +1,7 @@
 ---
 import Marquee from "./ui/Marquee.astro";
 import HeroImages from "./ui/HeroImages.astro";
+import DynamicText from "./ui/DynamicText.astro";
 
 const photos = [
   "8c647619-b682-4904-9564-b3f29304911b",
@@ -17,42 +18,54 @@ const photos = [
 const variables = `/-/scale_crop/1080x720/smart/-/grayscale/`;
 ---
 
-<section class="w-screen h-full bg-[#000000] relative">
-  <!-- <div
-    class="z-50 w-full overflow-hidden text-white font-display font-black absolute h-10"
+<section class="w-screen h-full flex flex-col bg-[#000000] relative">
+  <div
+    class="absolute flex flex-col justify-center h-screen items-center w-screen top-0 z-40 drop-shadow-2xl drop-shadow-black"
   >
-    <Marquee size="5xl" text="MusicsMostWanted.com" />
-  </div> -->
-
-  <!-- add overflow-hidden to below div -->
-
-  <div class="animate-loop-scroll w-full h-full overflow-hidden">
     <div
-      class="w-full h-full absolute bg-contain mix-blend-screen z-50 opacity-40 bg-[url('../../images/grain.jpg')]"
+      class="flex flex-col items-center justify-between w-[90vw] drop-shadow-xl drop-shadow-black"
     >
-    </div>
-    <div class="w-full h-full absolute bg-gray-500 opacity-15 z-40"></div>
-    <div class="flex flex-col gap-8 w-full h-full [&>*]:rounded-md pb-4">
-      {
-        photos.map((source) => (
-          <HeroImages source={source} variables={variables} />
-        ))
-      }
+      <img src="../../images/home_to_ug.png" alt="" />
     </div>
   </div>
-
-  <div class="animate-loop-scroll w-full h-full" aria-hidden="true">
-    <div
-      class="w-full h-full absolute bg-contain mix-blend-screen z-50 opacity-40 bg-[url('../../images/grain.jpg')]"
+  <div class="w-full h-[100svh] overflow-hidden relative">
+    <!-- <div
+      class="z-50 w-full overflow-hidden text-white font-display font-black absolute h-10"
     >
+      <Marquee size="5xl" text="MusicsMostWanted.com" />
+    </div> -->
+
+    <!-- add overflow-hidden to below div -->
+    <div class="w-full h-full bg-[rgb(0,0,0,0.5)] z-10 absolute"></div>
+
+    <div class="animate-loop-scroll w-full h-full overflow-hidden">
+      <div
+        class="w-full h-full absolute bg-contain mix-blend-screen z-50 opacity-40 bg-[url('../../images/grain.jpg')]"
+      >
+      </div>
+      <div class="w-full h-full absolute bg-gray-500 opacity-15 z-40"></div>
+      <div class="flex flex-col gap-8 w-full h-full [&>*]:rounded-md pb-4">
+        {
+          photos.map((source) => (
+            <HeroImages source={source} variables={variables} />
+          ))
+        }
+      </div>
     </div>
-    <div class="w-full h-full absolute bg-gray-500 opacity-15 z-40"></div>
-    <div class="flex flex-col gap-8 w-full h-full [&>*]:rounded-md pt-4">
-      {
-        photos.map((source) => (
-          <HeroImages source={source} variables={variables} />
-        ))
-      }
+
+    <div class="animate-loop-scroll w-full h-full" aria-hidden="true">
+      <div
+        class="w-full h-full absolute bg-contain mix-blend-screen z-50 opacity-40 bg-[url('../../images/grain.jpg')]"
+      >
+      </div>
+      <div class="w-full h-full absolute bg-gray-500 opacity-15 z-40"></div>
+      <div class="flex flex-col gap-8 w-full h-full [&>*]:rounded-md pt-4">
+        {
+          photos.map((source) => (
+            <HeroImages source={source} variables={variables} />
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>

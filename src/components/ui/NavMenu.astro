@@ -1,0 +1,75 @@
+---
+
+---
+
+<div class="w-screen h-screen z-50 fixed flex items-end">
+  <div
+    class="w-full bg-[rgb(0,0,0,0.4)] h-16 absolute top-0 z-40 border-b-[0.1px] grid grid-cols-2 backdrop-blur-xl shadow-2xl shadow-[rgba(0,0,0,0.4)]"
+  >
+    <div class="h-full flex justify-start items-center px-4">
+      <img src="../../images/logo.png" alt="" class="object-cover h-12" />
+    </div>
+    <div class="flex w-full h-full justify-end items-center">
+      <div
+        class="aspect-square border-l-[0.1px] h-full flex justify-center items-center select-none hover:cursor-pointer"
+        id="menuBtn"
+      >
+        <span id="openText" class="text-[#e8ddd3]">MENU</span>
+        <span id="closeText" class="text-[#e8ddd3] hidden">HIDE</span>
+      </div>
+    </div>
+  </div>
+  <nav
+    id="menu"
+    class="w-full h-[calc(100vh-4rem)] bg-[rgb(0,0,0,0.4)] hidden backdrop-blur-xl z-[100]"
+  >
+    <div
+      class="flex flex-col font-bold font-satoshi leading-none text-6xl items-center [&>*]:py-2 [&>*]:border-b-[0.1px] [&>*]:w-full [&>*]:hover:cursor-pointer text-center text-[#e8ddd3] select-none"
+    >
+      <div>
+        <span>HOME</span>
+      </div>
+      <div>
+        <span>ARTISTS</span>
+      </div>
+      <div>
+        <span>ABOUT</span>
+      </div>
+      <div>
+        <span>BLOG</span>
+      </div>
+      <div>
+        <span>EVENTS</span>
+      </div>
+      <div>
+        <span>SHOP</span>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<script>
+  const menu = document.querySelector("#menu");
+  const menuBtn = document.querySelector("#menuBtn");
+  const closeText = document.querySelector("#closeText");
+  const openText = document.querySelector("#openText");
+
+  let isMenuOpen = false;
+
+  function Nav() {
+    if (isMenuOpen === true) {
+      menu.classList.toggle("hidden");
+      closeText.classList.toggle("hidden");
+      openText.classList.toggle("hidden");
+      isMenuOpen = false;
+    } else {
+      menu.classList.add("hidden");
+      closeText.classList.add("hidden");
+      openText.classList.remove("hidden");
+      isMenuOpen = true;
+    }
+  }
+
+  menuBtn.addEventListener("click", Nav);
+  window.addEventListener("load", Nav);
+</script>

@@ -4,12 +4,7 @@
 
 html,
 body {
-  overflow: hidden;
-}
-
-@font-face {
-  font-family: "Steps-Mono";
-  src: url("../../public/fonts/Steps-Mono.otf");
+  overflow-x: hidden;
 }
 
 /* animate marquee */

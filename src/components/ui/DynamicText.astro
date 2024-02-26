@@ -1,0 +1,22 @@
+---
+const { text } = Astro.props;
+---
+
+<div class="parent-div">
+  <span class="dynamic-text font-eger">{text}</span>
+</div>
+
+<style>
+  .parent-div {
+    width: 100vw;
+    line-height: 1;
+    font-size: 0;
+  }
+
+  .dynamic-text {
+    display: block;
+    font-size: 900px;
+    line-height: 1;
+    color: white;
+  }
+</style>

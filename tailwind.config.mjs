@@ -14,8 +14,7 @@ export default {
       },
     },
     fontFamily: {
-      display: ["Steps-Mono"],
-      mono: ['"Kode Mono"'],
+      satoshi: ["Satoshi"],
       sans: ["sans-serif"],
     },
   },
