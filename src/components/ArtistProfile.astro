@@ -1,0 +1,175 @@
+---
+import Marquee from "../components/ui/Marquee.jsx";
+import { Icon } from "astro-icon/components";
+import DiscographyTab from "../components/link-page/DiscographyTab.astro";
+import LatestRelease from "../components/link-page/LatestRelease.astro";
+import LinksTab from "../components/link-page/LinksTab.astro";
+
+const socialMedias = [
+  {
+    name: "Twitter",
+    icon: "fa6-brands:x-twitter",
+    url: "https://twitter.com/drago_1k",
+  },
+  {
+    name: "Instagram",
+    icon: "fa-brands:instagram",
+    url: "https://www.instagram.com/drago_1k/",
+  },
+  {
+    name: "TikTok",
+    icon: "fa-brands:tiktok",
+    url: "https://www.tiktok.com/@dragok",
+  },
+  {
+    name: "Youtube",
+    icon: "fa-brands:youtube",
+    url: "https://www.youtube.com/c/drago1k",
+  },
+];
+
+const musicPlatforms = [
+  {
+    name: "Spotify",
+    icon: "fa-brands:spotify",
+    url: "https://open.spotify.com/artist/3KkS7r7HtMzvGJ8yGQpXzT",
+  },
+  {
+    name: "Apple Music",
+    icon: "fa-brands:apple",
+    url: "https://music.apple.com/us/artist/drago/1498283499",
+  },
+  {
+    name: "Youtube",
+    icon: "fa-brands:youtube",
+    url: "https://www.youtube.com/c/drago1k",
+  },
+  {
+    name: "SoundCloud",
+    icon: "fa-brands:soundcloud",
+    url: "https://soundcloud.com/drago1k",
+  },
+  {
+    name: "Bandcamp",
+    icon: "fa-brands:bandcamp",
+    url: "https://dragok.bandcamp.com",
+  },
+];
+---
+
+<main class="flex flex-col gap-4 mb-16 bg-bg font-satoshi">
+  <section class="font-satoshi text-[#e8ddd3] flex items-center flex-col">
+    <div class="flex flex-col items-center w-full">
+      <div class="relative flex">
+        <div
+          class="absolute h-full w-full bottom-0 bg-gradient-to-t from-bg via-transparent via-60%"
+        >
+        </div>
+        <img
+          src="https://ucarecdn.com/aa177329-baf8-40c5-8a70-bc42957a5f1c/-/scale_crop/720x780/center/"
+          class="object-cover"
+        />
+        <div class="absolute bottom-0 px-4 grid grid-cols-2 w-full">
+          <div class="flex flex-col justify-center">
+            <h1 class="text-4xl leading-[1] font-black">JRUGS</h1>
+            <span class="text-xl font-bold text-blue-300">@sexmoneyjrugs</span>
+          </div>
+          <div class="flex justify-end w-full">
+            <button class="text-6xl">
+              <Icon name="icon-park-solid:play" class="" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex items-center w-full justify-center px-4">
+    <div class="flex justify-center gap-6 w-full items-center">
+      {
+        socialMedias.map((socialMedia) => (
+          <a
+            href={socialMedia.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xl font-bold text-[#e8ddd3] hover:cursor-pointer hover:underline"
+          >
+            <Icon name={socialMedia.icon} />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <section
+    class="font-satoshi font-bold text-[#e8ddd3] flex flex-col gap-4 w-screen"
+  >
+    <div class="px-4">
+      <div
+        class="grid grid-flow-col rounded-full font-bold justify-items-stretch text-xs p-1 border border-gray-600"
+      >
+        <button id="tabBtn" class="tab tabActive">LINKS </button>
+        <button id="tabBtn" class="tab">MUSIC </button>
+        <button id="tabBtn" class="tab">BIO </button>
+        <button id="tabBtn" class="tab">EVENTS </button>
+        <button id="tabBtn" class="tab">SHOP </button>
+      </div>
+    </div>
+
+    <div>
+      <div id="tabContent" class="tabContent tabContentActive">
+        <LinksTab />
+      </div>
+      <div id="tabContent" class="tabContent"><DiscographyTab /></div>
+      <div id="tabContent" class="tabContent">EVENTS</div>
+      <div id="tabContent" class="tabContent">SHOP</div>
+    </div>
+  </section>
+</main>
+
+<style>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  .tab {
+    @apply py-2 rounded-full text-white text-center cursor-pointer tracking-wide;
+  }
+
+  .tabActive {
+    @apply bg-blue text-black;
+  }
+
+  .tabContent {
+    @apply hidden;
+  }
+
+  .tabContentActive {
+    @apply block;
+  }
+</style>
+
+<script>
+  const tabButtons = document.querySelectorAll(".tab");
+
+  function handleTabClick(event) {
+    tabButtons.forEach((button) => button.classList.remove("tabActive"));
+
+    event.currentTarget.classList.add("tabActive");
+
+    const clickedTabIndex = event.currentTarget.dataset.index;
+
+    const tabContents = document.querySelectorAll(".tabContent");
+
+    tabContents.forEach((content) =>
+      content.classList.remove("tabContentActive")
+    );
+
+    tabContents[clickedTabIndex].classList.add("tabContentActive");
+  }
+
+  tabButtons.forEach((button: HTMLButtonElement, index) => {
+    button.addEventListener("click", handleTabClick);
+    button.dataset.index = index.toString();
+  });
+</script>

@@ -26,10 +26,13 @@ import "../css/main.css";
       href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://use.typekit.net/eqj7cde.css" />
     <title>Music's Most Wanted</title>
   </head>
-  <body>
+  <body class="bg-bg">
     <NavMenu />
-    <slot />
+    <main class="w-screen min-h-screen bg-bg mt-16">
+      <slot />
+    </main>
   </body>
 </html>

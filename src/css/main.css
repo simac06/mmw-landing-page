@@ -5,6 +5,7 @@
 html,
 body {
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* animate marquee */
@@ -32,4 +33,20 @@ body {
   to {
     transform: translateX(0);
   }
+}
+
+.marquee {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+  @apply font-satoshi;
+}
+
+.track {
+  white-space: nowrap;
+}
+
+.track > h1 {
+  text-transform: uppercase;
 }

@@ -18,7 +18,8 @@ const photos = [
 const variables = `/-/scale_crop/1080x720/smart/-/grayscale/`;
 ---
 
-<section class="w-screen h-full flex flex-col bg-[#000000] relative">
+<section class="w-screen h-full flex flex-col bg-black relative">
+  <!-- Home to the underground image-->
   <div
     class="absolute flex flex-col justify-center h-screen items-center w-screen top-0 z-40 drop-shadow-2xl drop-shadow-black"
   >
@@ -31,16 +32,10 @@ const variables = `/-/scale_crop/1080x720/smart/-/grayscale/`;
       />
     </div>
   </div>
+
+  <!-- Looping images -->
   <div class="w-full h-[100svh] overflow-hidden relative">
-    <!-- <div
-      class="z-50 w-full overflow-hidden text-white font-display font-black absolute h-10"
-    >
-      <Marquee size="5xl" text="MusicsMostWanted.com" />
-    </div> -->
-
-    <!-- add overflow-hidden to below div -->
     <div class="w-full h-full bg-[rgb(0,0,0,0.5)] z-10 absolute"></div>
-
     <div class="animate-loop-scroll w-full h-full overflow-hidden">
       <div
         class="w-full h-full absolute bg-contain mix-blend-screen z-50 opacity-40 bg-[url('https://ucarecdn.com/ff77a161-2ef3-4048-9dc9-6bcf2128daff/-/preview/1000x606/')]"

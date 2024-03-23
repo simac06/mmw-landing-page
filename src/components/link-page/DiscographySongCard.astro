@@ -1,0 +1,29 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div class="w-full flex gap-3 relative">
+  <div class="h-14 aspect-square">
+    <img
+      src="https://ucarecdn.com/f0dd7c5e-0ff7-4643-9b40-288914eaeae6/-/scale_crop/700x700/smart/"
+      class="object-cover h-full rounded-md"
+    />
+  </div>
+
+  <div class="flex flex-col col-span-3 w-full justify-center">
+    <span class="text-xl font-bold">Ride Deep</span>
+    <span class="text-md font-normal">1,000,000 streams</span>
+  </div>
+
+  <div class="absolute right-0 h-full flex items-center justify-center">
+    <!-- <button
+        class="text-sm font-medium bg-blue-400 px-4 py-1 flex gap-2 items-center rounded-full"
+      >
+        <Icon name="fa6-solid:play" class="" />
+        PLAY
+      </button> -->
+    <button class="w-full h-full text-4xl">
+      <Icon name="icon-park-solid:play" class="" />
+    </button>
+  </div>
+</div>
