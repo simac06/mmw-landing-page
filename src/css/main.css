@@ -50,3 +50,21 @@ body {
 .track > h1 {
   text-transform: uppercase;
 }
+
+/*  Font Styling  */
+
+.title {
+  font-family: "scale-variable", sans-serif;
+  font-variation-settings: "wdth" 125, "wght" 700;
+}
+.subtitle {
+  font-family: "scale-variable", sans-serif;
+  font-variation-settings: "wdth" 100, "wght" 300;
+}
+
+/*  Disallow scrolling on modal open  */
+
+body:has(dialog[open]) {
+  overflow: hidden;
+  position: fixed;
+}

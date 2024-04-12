@@ -1,0 +1,20 @@
+---
+const { linkBlocks } = Astro.props;
+
+import PresaveLink from "./PresaveLink.astro";
+import RegularLink from "./RegularLink.astro";
+
+const componentMapping = {
+  regular: RegularLink,
+  presave: PresaveLink,
+};
+---
+
+<div class="grid grid-cols-1 w-full text-black gap-4">
+  {
+    linkBlocks.map((item) => {
+      const Component = componentMapping[item.type];
+      return <Component data={item} />;
+    })
+  }
+</div>

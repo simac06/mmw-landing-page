@@ -1,5 +1,6 @@
 ---
 import NavMenu from "../components/ui/NavMenu.astro";
+import Hero from "../components/Hero.astro";
 import { ViewTransitions, slide } from "astro:transitions";
 
 import "../css/main.css";
@@ -33,8 +34,7 @@ import "../css/main.css";
   </head>
   <body class="bg-bg">
     <NavMenu />
-    <main class="w-screen bg-bg mt-16">
-      <slot />
-    </main>
+
+    <slot />
   </body>
 </html>

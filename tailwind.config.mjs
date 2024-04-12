@@ -5,8 +5,11 @@ export default {
     colors: {
       blue: "#67D5FF",
       white: "#F4FBFF",
-      black: "#333A3E",
-      bg: "#1D1E1E",
+      black: "#1E1F1F",
+
+      gray: "#464949",
+
+      bg: "#141515",
     },
     extend: {
       animation: {

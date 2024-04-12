@@ -1,5 +1,4 @@
 ---
-import DynamicText from "./ui/DynamicText.astro";
 import Marquee from "./ui/Marquee.jsx";
 
 const photos = ["efab28a1-06a6-430f-9418-9adb7bfb8013"];
@@ -7,47 +6,53 @@ const photos = ["efab28a1-06a6-430f-9418-9adb7bfb8013"];
 const variables = `/-/scale_crop/720x1080/smart/`;
 ---
 
-<section class="flex flex-col items-center">
-  <div
-    class="flex flex-col w-full h-full items-center font-satoshi text-[#e8ddd3] gap-4"
-  >
-    <div class="w-full font-black">
-      <Marquee content="Artists / " client:load />
+<section class="px-6 text-white flex flex-col gap-16 mt-32">
+  <div class="flex flex-col gap-4 justify-center text-center items-center">
+    <h1 class="title text-4xl text-blue">THE WATCHLIST</h1>
+    <p class="subtitle text-xl tracking-wide text-center">
+      Who's about to blow up?<br />Our artists are defining the next generation
+      of music.<br /><br />Music's Most Wanted presents The Watchlist.
+    </p>
+  </div>
+  <div class="grid grid-cols-2 gap-6">
+    <div
+      class="relative hover:scale-105 transition-transform duration-300 hover:cursor-pointer group"
+    >
+      <span class="title text-2xl absolute bottom-0 p-3 z-20">JRUGS</span>
+      <div
+        class="absolute w-full h-full bg-gradient-to-t from-bg via-transparent to-transparent from-10% to-40% z-10"
+      >
+      </div>
+      <img
+        src="https://ucarecdn.com/aa177329-baf8-40c5-8a70-bc42957a5f1c/-/scale_crop/720x800/smart/"
+        class="object-cover rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-300"
+      />
     </div>
-    <div class="w-full grid grid-cols-2 px-2 gap-3">
-      <div class="relative flex rounded">
-        <div
-          class="bg-[rgb(0,0,0,0.3)] absolute w-full h-full flex items-end p-2"
-        >
-          <span class="text-2xl font-bold drop-shadow-sm">DRAGO</span>
-        </div>
-        <img
-          src="https://ucarecdn.com/aa177329-baf8-40c5-8a70-bc42957a5f1c/-/scale_crop/720x900/center/"
-          class="object-cover rounded"
-        />
+    <div
+      class="relative hover:scale-105 transition-transform duration-300 hover:cursor-pointer group"
+    >
+      <span class="title text-2xl absolute bottom-0 p-3 z-20">APOSTOLI</span>
+      <div
+        class="absolute w-full h-full bg-gradient-to-t from-bg via-transparent to-transparent from-10% to-40% z-10"
+      >
       </div>
-      <div class="relative flex rounded">
-        <div
-          class="bg-[rgb(0,0,0,0.2)] absolute w-full h-full flex items-end p-2"
-        >
-          <span class="text-2xl font-bold">APOSTOLI</span>
-        </div>
-        <img
-          src="https://ucarecdn.com/8c647619-b682-4904-9564-b3f29304911b/-/scale_crop/720x900/center/"
-          class="object-cover rounded"
-        />
+      <img
+        src="https://ucarecdn.com/8c647619-b682-4904-9564-b3f29304911b/-/scale_crop/720x800/center/"
+        class="object-cover rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-300"
+      />
+    </div>
+    <div
+      class="relative hover:scale-105 transition-transform duration-300 hover:cursor-pointer group"
+    >
+      <span class="title text-2xl absolute bottom-0 p-3 z-20">JRUGS</span>
+      <div
+        class="absolute w-full h-full bg-gradient-to-t from-bg via-transparent to-transparent from-10% to-40% z-10"
+      >
       </div>
-      <div class="relative flex rounded">
-        <div
-          class="bg-[rgb(0,0,0,0.2)] absolute w-full h-full flex items-end p-2"
-        >
-          <span class="text-2xl font-bold">APOSTOLI</span>
-        </div>
-        <img
-          src="https://ucarecdn.com/8c647619-b682-4904-9564-b3f29304911b/-/scale_crop/720x900/center/"
-          class="object-cover rounded"
-        />
-      </div>
+      <img
+        src="https://ucarecdn.com/8c647619-b682-4904-9564-b3f29304911b/-/scale_crop/720x800/center/"
+        class="object-cover rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-300"
+      />
     </div>
   </div>
 </section>
