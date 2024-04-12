@@ -31,8 +31,7 @@ links:
       type: "presave",
       title: "RIDE DEEP",
       releaseDate: "March 2",
-      presaveUrls:
-        {
+      presaveUrls: {
           spotify: "https://spotify.com",
           appleMusic: "https://apple.com",
           soundcloud: "https://soundcloud.com",
