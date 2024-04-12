@@ -1,32 +1,36 @@
 ---
 import { Icon } from "astro-icon/components";
+import concertPoster from "../../images/concert_poster.jpg";
+import { Image } from "astro:assets";
 
 const { data } = Astro.props;
 ---
 
-<div
-  class="flex flex-col font-display items-center bg-bg rounded-xl border-[0.75px] lg:border-2 p-4 lg:p-4 lg:gap-4 border-gray gap-3 relative w-full max-w-screen"
->
-  <div class="w-full flex gap-4">
-    <div class="w-1/3">
-      <!-- Added width and height classes here -->
-      <img
-        class="w-full h-full object-cover rounded-md"
-        src="../../../images/concert_poster.jpg"
-        alt="Concert Poster"
-      />
-    </div>
-    <div class="w-3/4 flex flex-col gap-4">
-      <span class="title text-xl lg:text-2xl">CONCERT TITLE</span>
-
-      <div class="flex items-center gap-2 text-lg">
-        <Icon name="fa6-solid:location-dot" />
-        <span class="">Toronto, Ontario</span>
+<a href="/events/example">
+  <div
+    class="flex flex-col font-display items-center bg-bg rounded-xl border-[0.75px] lg:border-2 p-4 lg:p-4 lg:gap-4 border-gray gap-3 relative w-full max-w-screen"
+  >
+    <div class="w-full flex gap-4">
+      <div class="w-1/3">
+        <!-- Added width and height classes here -->
+        <Image
+          class="w-full h-full object-cover rounded-md"
+          src={concertPoster}
+          alt="Concert Poster"
+        />
       </div>
-      <div class="flex items-center gap-2 text-lg">
-        <Icon name="fa6-solid:calendar" />
-        <span class="font-normal text-md lg:text-lg">March 22 - 8:00 PM</span>
+      <div class="w-3/4 flex flex-col gap-2">
+        <span class="title text-lg lg:text-2xl">CONCERT TITLE</span>
+
+        <div class="flex items-center gap-2 text-sm">
+          <Icon name="fa6-solid:location-dot" />
+          <span class="text-sm">Toronto, Ontario</span>
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+          <Icon name="fa6-solid:calendar" />
+          <span class="font-normal text-md lg:text-lg">March 22 - 8:00 PM</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</a>
