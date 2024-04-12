@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import concertPoster from "../../images/concert_poster.jpg";
 import Marquee from "../ui/Marquee.jsx";
 import { Icon } from "astro-icon/components";
 
@@ -42,12 +44,14 @@ const socialMedias = [
           class="absolute h-full w-full bottom-0 bg-gradient-to-t from-bg lg:via-transparent to-transparent lg:from-10% lg:to-40%"
         >
         </div>
-        <img
-          src="../../../images/concert_poster.jpg"
+        <Image
+          src={concertPoster}
+          alt="concert poster"
           class="object-cover lg:hidden"
         />
-        <img
-          src="../../../images/concert_poster.jpg"
+        <Image
+          src={concertPoster}
+          alt="concert poster"
           class="object-cover w-full h-[calc(100vh-4rem)] hidden lg:block"
         />
         <div class="absolute bottom-0 px-4 lg:p-12 w-full left-0 right-0">

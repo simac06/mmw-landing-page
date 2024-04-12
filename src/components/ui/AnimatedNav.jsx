@@ -1,5 +1,6 @@
 import { motion, easeInOut, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import logo from "../../images/logo.png";
 
 const menuVariants = {
   open: {
@@ -32,8 +33,8 @@ export default function AnimatedNav(props) {
         <div className="h-full flex justify-start items-center px-4">
           <a href="/">
             <img
-              src="../../../images/logo.png"
-              alt=""
+              src={logo.src}
+              alt="Music's Most Wanted Logo"
               className="object-cover h-12"
             />
           </a>
