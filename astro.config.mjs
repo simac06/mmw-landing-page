@@ -19,7 +19,7 @@ export default defineConfig({
       projectId: process.env.SANITY_PROJECT_ID,
       dataset: process.env.SANITY_DATASET,
       apiVersion: process.env.SANITY_API_VER,
-      useCdn: true,
+      useCdn: false,
     }),
   ],
   output: "server",
