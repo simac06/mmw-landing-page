@@ -23,7 +23,9 @@ export default defineConfig({
     }),
   ],
   output: "server",
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: { enabled: true },
+  }),
   vite: {
     define: {
       "import.meta.env.SANITY_STUDIO_API_PROJECT_ID": JSON.stringify(
