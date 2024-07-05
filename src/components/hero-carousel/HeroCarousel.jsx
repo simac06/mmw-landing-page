@@ -39,11 +39,14 @@ export function EmblaCarousel({ slides }) {
   const isPortrait = (image) => {
     const ref = image.asset._ref;
     const match = ref.match(/-(\d+)x(\d+)-/);
+
     if (match) {
       const width = parseInt(match[1]);
       const height = parseInt(match[2]);
-      return height > width;
+      return height >= width; // Treat equal dimensions as portrait
     }
+
+    // Default to false if no dimensions found (could be an error or special case)
     return false;
   };
 
@@ -65,15 +68,18 @@ export function EmblaCarousel({ slides }) {
                   position: "relative",
                 }}
               >
-                <div className="absolute bottom-0 md:mb-12 md:left-14 ml-12 mb-10 md:ml-4 z-10 w-full">
-                  <div className="flex flex-col justify-center items-start gap-3 md:gap-6 w-2/3">
-                    <span className="text-blue tracking-[-0.1em] text-6xl md:text-[7rem] capitalize leading-tight font-obviously_title font-[600]">
+                <div className="absolute bottom-0 lg:mb-12 lg:left-14 ml-12 mb-10 lg:ml-4 z-10 w-full">
+                  <div className="flex flex-col justify-center items-start gap-3 md:gap-6 w-fit">
+                    <span className="text-blue tracking-[-0.1em] text-6xl md:text-[6rem]  leading-[0.9] font-obviously_title font-[600]">
+                      {slide.title}
+                    </span>
+                    <span className="text-white tracking-[-0.1em] text-3xl md:text-[3rem] lg:pl-2  leading-[0.9] font-obviously_title font-[600]">
                       {slide.artist_name}
                     </span>
-                    <span className="subtitle">{slide.title}</span>
+                    <span className=" lg:pl-2 subtitle">{slide.caption}</span>
 
                     <a href={slide.url}>
-                      <div className="text-blue md:text-lg font-obviously_body font-[500] px-6 pb-1 md:px-8 md:pt-2 md:pb-3 bg-bg border-2 border-blue rounded-2xl lowercase">
+                      <div className="lg:ml-2 text-blue md:text-lg font-obviously_body font-[500] px-6 pb-1 md:px-8 md:pt-2 md:pb-3 bg-bg border-2 border-blue rounded-2xl lowercase">
                         {slide.url_title}
                       </div>
                     </a>
@@ -83,21 +89,21 @@ export function EmblaCarousel({ slides }) {
                   <div className="portrait-container flex relative md:grid md:grid-cols-[1fr_max-content_1fr] h-full w-full brightness-75">
                     <div className="h-full relative  hidden md:block">
                       <img
-                        className="embla__slide__img object-cover h-full object-right"
+                        className="embla__slide__img blur-md scale-[1.3] object-cover h-full object-right"
                         src={urlForImage(slide.image).url()}
                         alt=""
                       />
                     </div>
                     <div className="h-full w-full flex justify-center items-center">
                       <img
-                        className="embla__slide__img object-cover w-full h-[calc(100svh-4rem)] md:scale-[1.001] object-center"
+                        className="embla__slide__img object-cover z-10 w-full h-[calc(100svh-4rem)] md:scale-[1.001] object-center"
                         src={urlForImage(slide.image).url()}
                         alt=""
                       />
                     </div>
                     <div className="h-full relative hidden md:block">
                       <img
-                        className="embla__slide__img h-full object-cover object-left"
+                        className="embla__slide__img blur-md scale-[1.3] h-full object-cover object-left"
                         src={urlForImage(slide.image).url()}
                         alt=""
                       />

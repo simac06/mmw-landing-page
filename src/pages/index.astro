@@ -3,7 +3,10 @@ import HomeLayout from "../layouts/HomeLayout.astro";
 import { EmblaCarousel } from "../components/hero-carousel/HeroCarousel.jsx";
 import { sanityClient } from "sanity:client";
 
-const homeSlides = await sanityClient.fetch(`*[_type == "heroSlide"]`);
+const homeData = await sanityClient.fetch(`*[_type == "home"][0]`);
+
+// Extract the heroSlides array, handling the case where homeData might be null
+const homeSlides = homeData?.heroSlides || [];
 ---
 
 <HomeLayout>

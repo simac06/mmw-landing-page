@@ -1,6 +1,5 @@
 ---
 import NavMenu from "../components/ui/NavMenu.astro";
-import Hero from "../components/depreciated_Hero.astro";
 import { ViewTransitions, slide } from "astro:transitions";
 import { sanityClient } from "sanity:client";
 
@@ -113,8 +112,6 @@ const siteSettings = await sanityClient.fetch(
         <link rel="manifest" href={siteSettings.favicons.siteWebmanifest} />
       )
     }
-
-    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <link

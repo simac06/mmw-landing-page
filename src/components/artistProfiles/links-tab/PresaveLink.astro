@@ -135,7 +135,7 @@ let numberOfLinks = links.length;
     </div>
 
     <div
-      class=`grid ${numberOfLinks > 5 ? "[&>*]:border-t-[1px] [&>*:nth-child(odd)]:border-r-[1px]" : "[&>*:not(:last-child)]:border-b-[1px]"} [&>*]:border-gray ${numberOfLinks > 5 ? "grid-cols-2" : "grid-cols-1"}`
+      class:list=`grid ${numberOfLinks > 5 ? "[&>*]:border-t-[1px] [&>*:nth-child(odd)]:border-r-[1px]" : "[&>*:not(:last-child)]:border-b-[1px]"} [&>*]:border-gray ${numberOfLinks > 5 ? "grid-cols-2" : "grid-cols-1"}`
     >
       {
         links.map((link) => (

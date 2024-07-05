@@ -1,5 +1,4 @@
 ---
-import Marquee from "../ui/Marquee.jsx";
 import { Icon } from "astro-icon/components";
 import DiscographyTab from "./discography-tab/DiscographyTab.astro";
 import LinksTab from "./links-tab/LinksTab.astro";
@@ -10,7 +9,6 @@ import { Image } from "astro:assets";
 const { data } = Astro.props;
 
 const coverImage = urlForImage(data.image);
-console.log(coverImage.url());
 
 const socialMedias = [
   {
