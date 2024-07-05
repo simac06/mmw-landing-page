@@ -4,25 +4,35 @@ import react from "@astrojs/react";
 import icon from "astro-icon";
 import sanity from "@sanity/astro";
 import { loadEnv } from "vite";
+import dotenv from "dotenv";
 
 import vercel from "@astrojs/vercel/serverless";
 
-const env = loadEnv("", process.cwd(), "SANITY");
+dotenv.config();
 
-// https://astro.build/config
 export default defineConfig({
   integrations: [
     tailwind(),
     react(),
     icon(),
     sanity({
-      projectId: env.SANITY_PROJECT_ID,
-      dataset: env.SANITY_DATASET,
-      apiVersion: env.SANITY_API_VER,
+      projectId: process.env.SANITY_PROJECT_ID,
+      dataset: process.env.SANITY_DATASET,
+      apiVersion: process.env.SANITY_API_VER,
       useCdn: true,
     }),
   ],
   output: "server",
   adapter: vercel(),
+  vite: {
+    define: {
+      "import.meta.env.SANITY_STUDIO_API_PROJECT_ID": JSON.stringify(
+        process.env.SANITY_PROJECT_ID
+      ),
+      "import.meta.env.SANITY_STUDIO_API_DATASET": JSON.stringify(
+        process.env.SANITY_DATASET
+      ),
+    },
+  },
   site: "https://mmw-landing-page.vercel.app",
 });
