@@ -2,6 +2,7 @@
 import NavMenu from "../components/ui/NavMenu.astro";
 import { ViewTransitions, slide } from "astro:transitions";
 import { sanityClient } from "sanity:client";
+import { urlForImage } from "../lib/urlForImage";
 
 import "../css/main.css";
 
@@ -10,8 +11,7 @@ import Footer from "../components/ui/Footer.astro";
 // get sanity site settings from sanity
 
 const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"]`);
-
-const logo = siteSettings[0].logo;
+const { favicons, logo } = siteSettings[0];
 ---
 
 <html lang="en" class="bg-bg">

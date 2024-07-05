@@ -10,8 +10,9 @@ import Footer from "../components/ui/Footer.astro";
 // get sanity site settings from sanity
 
 const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"]`);
+const { favicons, logo } = siteSettings[0];
 
-const logo = siteSettings[0].logo;
+console.log(favicons);
 ---
 
 <html lang="en" class="bg-bg">

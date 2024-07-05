@@ -20,6 +20,7 @@
     "@iconify-json/mdi": "^1.1.67",
     "@iconify-json/octicon": "^1.1.52",
     "@iconify-json/simple-icons": "^1.1.97",
+    "@sanity/asset-utils": "^1.3.0",
     "@sanity/astro": "^3.0.0",
     "@sanity/client": "^6.15.14",
     "@types/react": "^18.2.58",
