@@ -1,9 +1,15 @@
 ---
-import Hero from "../components/Hero.astro";
-import Artists from "../components/ArtistGrid.astro";
 import HomeLayout from "../layouts/HomeLayout.astro";
+import { EmblaCarousel } from "../components/hero-carousel/HeroCarousel.jsx";
+import { sanityClient } from "sanity:client";
+
+const homeSlides = await sanityClient.fetch(`*[_type == "heroSlide"]`);
 ---
 
 <HomeLayout>
-  <Hero />
+  <section
+    class="w-screen h-[calc(100svh-4rem)] scroll-none overflow-hidden mt-16 bg-bg"
+  >
+    <EmblaCarousel client:load slides={homeSlides} />
+  </section>
 </HomeLayout>

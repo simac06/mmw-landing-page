@@ -53,13 +53,19 @@ body {
 
 /*  Font Styling  */
 
-.title {
-  font-family: "scale-variable", sans-serif;
-  font-variation-settings: "wdth" 125, "wght" 700;
+.page_title {
+  @apply font-obviously_title font-[600] text-3xl text-blue;
 }
 .subtitle {
-  font-family: "scale-variable", sans-serif;
-  font-variation-settings: "wdth" 100, "wght" 300;
+  @apply font-obviously_body font-[400] text-base tracking-wide text-white;
+}
+
+.text {
+  @apply font-obviously_body  tracking-wide text-white;
+}
+
+.title {
+  @apply font-obviously_title font-[600];
 }
 
 /*  Disallow scrolling on modal open  */
@@ -67,4 +73,34 @@ body {
 body:has(dialog[open]) {
   overflow: hidden;
   position: fixed;
+}
+
+/* embla carousel */
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.embla__dots {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  gap: 0.25rem;
+}
+
+/* Artists Link Page */
+
+.pinned_song_button {
+  @apply text-white flex justify-center items-center h-5;
+}
+
+.pinned_song_button_more {
+  @apply text-white flex justify-center font-obviously_body items-center px-3 font-medium text-xs;
 }

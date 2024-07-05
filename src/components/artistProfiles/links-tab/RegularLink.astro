@@ -1,17 +1,27 @@
 ---
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import { urlForImage } from "../../../lib/urlForImage";
 const { data } = Astro.props;
 ---
 
 <div
-  class="bg-bg w-full rounded-xl border-[0.75px] lg:border-2 border-gray p-2 lg:p-4 flex justify-between"
+  class="w-full font-obviously_body items-center bg-bg px-6 py-4 lg:py-10 relative flex gap-6"
 >
-  <div class="aspect-square h-16 lg:h-24">
-    <img class="rounded-md" src={data.image.src} alt="" />
+  <div class="aspect-square h-20 lg:h-24">
+    <Image
+      src={urlForImage(data.image)
+        .auto("format")
+        .width(300)
+        .height(300)
+        .fit("crop")
+        .crop("top")
+        .url()}
+      inferSize={true}
+      alt={data.image.caption}
+      class="rounded-md"
+    />
   </div>
-  <div
-    class="text-white font-display font-normal text-sm lg:text-lg flex text-center items-center justify-center w-full"
-  >
-    <span class="text-md px-8">{data.title}</span>
-  </div>
+
+  <span class="text-white text-sm font-[400] lg:text-lg">{data.title}</span>
 </div>

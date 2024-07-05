@@ -2,6 +2,12 @@
 import { getEntryBySlug } from "astro:content";
 import AnimatedNav from "./AnimatedNav.jsx";
 import { Icon } from "astro-icon/components";
+import { urlForImage } from "../../lib/urlForImage";
+import { Image } from "astro:assets";
+
+const { logo } = Astro.props;
+
+const logoURL = urlForImage(logo).url();
 
 const pages = [
   {
@@ -27,40 +33,21 @@ const pages = [
 ];
 ---
 
-<AnimatedNav client:load>
-  <div
-    class="flex flex-col h-full font-display [&>*]:w-full text-white select-none"
-  >
+<AnimatedNav client:load logo={logoURL}>
+  <div class="flex h-full font-display text-white select-none">
     <div
-      class="flex flex-col h-4/6 uppercase justify-around [&>*]:hover:cursor-pointer font-bold tracking-wide text-4xl title p-8"
+      class="flex
+        flex-col
+        w-full
+        items-center
+        uppercase
+        justify-center
+        gap-6
+        [&
+      >
+        *]:hover:cursor-pointer title text-4xl"
     >
       {pages.map((page) => <a href={`/${page.slug}`}>{page.name}</a>)}
-    </div>
-    <div class="h-2/6 flex justify-between flex-col py-4 px-8">
-      <div
-        class="flex flex-col font-display items-center bg-bg w-full rounded-xl border-[0.75px] lg:border-2 p-4 lg:p-4 lg:gap-4 border-gray gap-3 relative"
-      >
-        <div class="flex flex-col w-full text-white pr-12">
-          <span class="text-lg lg:text-2xl text-blue">MostWanted FM</span>
-          <span class="font-normal text-sm"
-            >Stream the official MMW Playlist featuring the latest underground
-            rap hits</span
-          >
-        </div>
-        <button
-          id="presaveBtn"
-          class="flex flex-col items-center justify-center h-full text-white pr-4 absolute bottom-0 right-0"
-        >
-          <Icon name="icon-park-solid:play" class="text-4xl" />
-        </button>
-      </div>
-      <div class="flex space-x-4 text-xl">
-        <Icon name="fa6-brands:twitter" />
-        <Icon name="fa6-brands:instagram" />
-        <Icon name="fa6-brands:youtube" />
-        <Icon name="fa6-brands:tiktok" />
-        <Icon name="fa6-brands:facebook" />
-      </div>
     </div>
   </div>
 </AnimatedNav>

@@ -1,8 +1,17 @@
 ---
 import NavMenu from "../components/ui/NavMenu.astro";
 import { ViewTransitions, slide } from "astro:transitions";
+import { sanityClient } from "sanity:client";
 
 import "../css/main.css";
+
+import Footer from "../components/ui/Footer.astro";
+
+// get sanity site settings from sanity
+
+const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"]`);
+
+const logo = siteSettings[0].logo;
 ---
 
 <html lang="en" class="bg-bg">
@@ -32,9 +41,11 @@ import "../css/main.css";
     <ViewTransitions transition:animate="fade" />
   </head>
   <body class="bg-bg">
-    <NavMenu />
+    <NavMenu logo={logo} />
     <main class="w-screen bg-bg mt-16">
       <slot />
     </main>
+
+    <Footer logo={logo} />
   </body>
 </html>

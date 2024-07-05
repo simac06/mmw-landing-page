@@ -2,8 +2,13 @@
 import NavMenu from "../components/ui/NavMenu.astro";
 import Hero from "../components/Hero.astro";
 import { ViewTransitions, slide } from "astro:transitions";
+import { sanityClient } from "sanity:client";
 
 import "../css/main.css";
+
+const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"]`);
+
+const logo = siteSettings[0].logo;
 ---
 
 <html lang="en" class="bg-bg">
@@ -33,7 +38,7 @@ import "../css/main.css";
     <ViewTransitions transition:animate="fade" />
   </head>
   <body class="bg-bg">
-    <NavMenu />
+    <NavMenu logo={logo} />
 
     <slot />
   </body>

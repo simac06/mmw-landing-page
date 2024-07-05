@@ -1,0 +1,49 @@
+---
+import NavMenu from "../components/ui/NavMenu.astro";
+import { ViewTransitions, slide } from "astro:transitions";
+import { sanityClient } from "sanity:client";
+
+import "../css/main.css";
+
+import Footer from "../components/ui/Footer.astro";
+
+// get sanity site settings from sanity
+
+const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"]`);
+
+const logo = siteSettings[0].logo;
+---
+
+<html lang="en" class="bg-bg">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://ucarecdn.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/eqj7cde.css" />
+    <title>Music's Most Wanted</title>
+    <ViewTransitions transition:animate="fade" />
+  </head>
+  <body class="bg-bg">
+    <NavMenu logo={logo} />
+    <main class="w-screen bg-bg mt-16">
+      <slot />
+    </main>
+  </body>
+</html>

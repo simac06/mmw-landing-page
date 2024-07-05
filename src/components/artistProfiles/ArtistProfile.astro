@@ -4,8 +4,13 @@ import { Icon } from "astro-icon/components";
 import DiscographyTab from "./discography-tab/DiscographyTab.astro";
 import LinksTab from "./links-tab/LinksTab.astro";
 import PlayDialog from "./PlayDialog.astro";
+import { urlForImage } from "../../lib/urlForImage";
+import { Image } from "astro:assets";
 
-const { frontmatter } = Astro.props;
+const { data } = Astro.props;
+
+const coverImage = urlForImage(data.image);
+console.log(coverImage.url());
 
 const socialMedias = [
   {
@@ -32,10 +37,15 @@ const socialMedias = [
 ---
 
 <main
-  class="flex flex-col lg:flex-row gap-4 lg:gap-0 mb-16 bg-bg font-display text-white font-bold lg:min-h-[calc(100vh-4rem)]"
+  class="flex flex-col lg:flex-row gap-4 lg:gap-0 mb-16 lg:mb-0 bg-bg text-white font-bold lg:min-h-[calc(100vh-4rem)]"
 >
   <!-- Play Dialog -->
-  <PlayDialog links={frontmatter.musicPlatforms} />
+  <PlayDialog
+    links={data.streamingLinks}
+    coverImage={coverImage.url()}
+    coverImageCaption={data.image.caption}
+    name={data.name}
+  />
   <section
     class="text-white flex items-center flex-col lg:w-1/2 h-full bg-blue"
   >
@@ -45,31 +55,46 @@ const socialMedias = [
           class="absolute h-full w-full bottom-0 bg-gradient-to-t from-bg lg:via-transparent to-transparent lg:from-10% lg:to-40%"
         >
         </div>
-        <img
-          src={`https://ucarecdn.com/` +
-            frontmatter.image.src +
-            `/-/scale_crop/720x820/center/`}
-          class="object-cover lg:hidden"
+        <Image
+          src={urlForImage(data.image)
+            .auto("format")
+            .width(720)
+            .height(820)
+            .fit("crop")
+            .crop("entropy")
+            .url()}
+          inferSize={true}
+          alt={data.image.caption}
+          class="object-cover w-full lg:hidden"
         />
-        <img
-          src={`https://ucarecdn.com/` +
-            frontmatter.image.src +
-            `/-/scale_crop/720x820/center/`}
+
+        <Image
+          src={urlForImage(data.image)
+            .auto("format")
+            .width(720)
+            .height(820)
+            .fit("crop")
+            .crop("entropy")
+            .url()}
+          inferSize={true}
+          alt={data.image.caption}
           class="object-cover w-full h-[calc(100vh-4rem)] hidden lg:block"
         />
         <div class="absolute bottom-0 px-4 lg:p-12 grid grid-cols-2 w-full">
-          <div class="flex flex-col justify-center">
-            <h1 class="text-4xl lg:text-7xl leading-[1] title uppercase">
-              {frontmatter.name}
+          <div class="flex flex-col lg:gap-2 justify-center">
+            <h1
+              class="text-4xl tracking-[-0.1em] text-blue lg:text-7xl leading-tight font-obviously_title font-[600] capitalize"
+            >
+              {data.name}
             </h1>
             <span
-              class="text-xl lg:text-4xl font-bold tracking-wider text-blue subtitle"
+              class="text-xl lg:text-2xl font-[500] tracking-wider text-white font-obviously_body"
             >
-              {frontmatter.handle}
+              @{data.handle}
             </span>
           </div>
           <div class="flex justify-end w-full">
-            <button id="playBtn" class="text-6xl lg:text-8xl">
+            <button id="playBtn" class="text-6xl lg:text-6xl">
               <Icon
                 name="icon-park-solid:play"
                 class="hover:text-blue transition-colors"
@@ -82,8 +107,8 @@ const socialMedias = [
   </section>
 
   <div class="border-l border-white hidden lg:block"></div>
-  <!-- 
-  <div class="flex items-center w-full justify-center px-4">
+
+  <div class="flex items-center w-full justify-center lg:hidden px-4 py-4">
     <div class="flex justify-center gap-6 w-full items-center">
       {
         socialMedias.map((socialMedia) => (
@@ -98,12 +123,12 @@ const socialMedias = [
         ))
       }
     </div>
-  </div> -->
+  </div>
 
   <section
-    class="flex flex-col gap-4 w-full px-4 lg:p-12 lg:gap-10 lg:w-1/2 lg:items-center"
+    class="flex flex-col gap-4 w-full lg:gap-10 lg:w-1/2 lg:items-center"
   >
-    <div
+    <!-- <div
       class="grid grid-flow-col rounded-full font-bold justify-items-stretch text-xs lg:text-lg p-1 border lg:border-2 border-gray shadow-md lg:w-5/6"
     >
       <button id="tabBtn" class="tab tabActive">
@@ -121,11 +146,14 @@ const socialMedias = [
       <button id="tabBtn" class="tab">
         SHOP{" "}
       </button>
-    </div>
+    </div> -->
 
     <div class="w-full">
       <div id="tabContent" class="tabContent tabContentActive">
-        <LinksTab linkBlocks={frontmatter.links} />
+        <LinksTab
+          regularLinks={data.stackedLinks}
+          pinnedSongLink={data.pinnedSongLink}
+        />
       </div>
       <div id="tabContent" class="tabContent">
         <DiscographyTab />

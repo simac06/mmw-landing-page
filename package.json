@@ -10,23 +10,35 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^3.0.10",
+    "@astrojs/react": "^3.3.0",
     "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/vercel": "^7.5.3",
     "@iconify-json/fa-brands": "^1.1.8",
     "@iconify-json/fa6-brands": "^1.1.18",
     "@iconify-json/fa6-solid": "^1.1.20",
     "@iconify-json/icon-park-solid": "^1.1.14",
+    "@iconify-json/mdi": "^1.1.67",
     "@iconify-json/octicon": "^1.1.52",
     "@iconify-json/simple-icons": "^1.1.97",
+    "@sanity/astro": "^3.0.0",
+    "@sanity/client": "^6.15.14",
     "@types/react": "^18.2.58",
     "@types/react-dom": "^18.2.19",
     "@vercel/analytics": "^1.2.2",
-    "astro": "^3.1.0",
+    "astro": "^4.6.1",
     "astro-icon": "^1.1.0",
+    "embla-carousel-autoplay": "^8.1.5",
+    "embla-carousel-fade": "^8.1.5",
+    "embla-carousel-react": "^8.1.5",
     "fitty": "^2.4.2",
     "framer-motion": "^11.0.28",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sanity": "^3.37.2",
     "tailwindcss": "^3.4.1"
+  },
+  "devDependencies": {
+    "@iconify/react": "^5.0.1",
+    "@tailwindcss/typography": "^0.5.13"
   }
 }

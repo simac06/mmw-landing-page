@@ -1,0 +1,84 @@
+---
+import Marquee from "./ui/Marquee.astro";
+import HeroImages3 from "./ui/HeroImage3.astro";
+import { Image } from "astro:assets";
+import tetxure from "../images/dust-scratches.jpg";
+
+const topPhotos = [
+  "8c647619-b682-4904-9564-b3f29304911b",
+  "3578904b-9b36-4632-8501-f9fa04146e12",
+  "efab28a1-06a6-430f-9418-9adb7bfb8013",
+  "ca33b197-b310-4a0e-b304-cd6be5b101de",
+  "57054ff0-e63c-49f8-8e6a-9ad74df87701",
+  "6e1092d9-042c-46dd-88f1-aaa96db0e44e",
+  "594f8202-d83d-4296-8483-a8adc3134535",
+  "52578b44-ffce-4c4a-b08f-83ea8c795212",
+  "025b7a1a-859a-44a7-ac8d-d61286efbdcc",
+];
+
+const bottomPhotos = [];
+for (let i = topPhotos.length - 1; i >= 0; i--) {
+  bottomPhotos.push(topPhotos[i]);
+}
+
+console.log("topPhotos", topPhotos);
+console.log("bottomPhotos", bottomPhotos);
+
+const variables = `/-/grayscale/-/scale_crop/1080x1080/smart/`;
+---
+
+<script>
+  var elem = document.querySelector(".main-carousel");
+  var flkty = new Flickity(elem, {
+    cellAlign: "left",
+    prevNextButtons: false,
+    pageDots: false,
+    contain: true,
+    wrapAround: true,
+    // autoPlay: 3000,
+    groupCells: 2,
+  });
+
+  // const carouselSlides = document.querySelectorAll(".carousel-cell");
+  // // select all the even number slides
+  // const carouselSlidesEven = [...carouselSlides].filter(
+  //   (slide, index) => index % 2 === 0
+  // );
+
+  // carouselSlidesEven.forEach((slide) => {
+  //   slide.classList.add("hidden");
+  // });
+</script>
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<style>
+  .main-carousel {
+    width: 100vw;
+    background-color: blue;
+    height: calc(100vh - 4rem);
+  }
+  .carousel-cell > img {
+  }
+  div.carousel-cell:nth-child(odd of .is-selected) > img {
+    border-right: 1px solid white;
+  }
+  .carousel-cell {
+    height: calc(100vh - 4rem);
+    width: 50%;
+  }
+</style>
+
+<section class="mt-16 relative">
+  <div
+    class="w-screen h-screen bg-[#5f6bcb] mix-blend-multiply absolute top-0 z-50"
+  >
+  </div>
+  <div class="main-carousel">
+    {
+      topPhotos.map((source) => (
+        <div class="carousel-cell">
+          <img src={`https://ucarecdn.com/${source}${variables}`} alt="" />
+        </div>
+      ))
+    }
+  </div>
+</section>

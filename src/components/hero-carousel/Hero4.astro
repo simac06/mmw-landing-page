@@ -1,0 +1,15 @@
+---
+import HeroCarousel from "./HeroCarousel.jsx";
+
+import { sanityClient } from "sanity:client";
+
+const homeSlides = await sanityClient.fetch(`*[_type == "heroSlide"]`);
+
+console.log("slides", homeSlides);
+---
+
+<section
+  class="w-screen min-h-[100svh] overflow-hidden lg:scroll-none justify-end flex flex-col relative"
+>
+  <HeroCarousel client:load slides={homeSlides} />
+</section>

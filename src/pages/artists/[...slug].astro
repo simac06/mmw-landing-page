@@ -1,20 +1,34 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sanityClient } from "sanity:client";
+import ArtistLayout from "../../layouts/ArtistLayout.astro";
 import ArtistProfile from "../../components/artistProfiles/ArtistProfile.astro";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
-  const artistProfiles = await getCollection("artists");
-  return artistProfiles.map((profile) => ({
-    params: { slug: profile.slug },
-    props: { profile },
-  }));
+  const artists = await sanityClient.fetch(
+    `*[_type == "artists" && defined(slug.current)]`
+  );
+
+  return artists.map((artist) => {
+    return {
+      params: {
+        slug: artist.slug.current,
+      },
+    };
+  });
 }
 
-const { profile } = Astro.props;
-const { Content } = await profile.render();
+const { slug } = Astro.params;
+
+const artistData = await sanityClient.fetch(
+  `*[_type == "artists" && slug.current == $slug][0]`,
+  {
+    slug,
+  }
+);
 ---
 
-<BaseLayout>
-  <ArtistProfile frontmatter={profile.data} />
-</BaseLayout>
+<ArtistLayout>
+  <ArtistProfile data={artistData} />
+</ArtistLayout>

@@ -1,13 +1,15 @@
 import { motion, easeInOut, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import logo from "../../images/logo.png";
 
 const menuVariants = {
   open: {
     y: 0,
+    opacity: 1,
   },
   closed: {
-    y: "100%",
+    // y: "100%",
+    y: 0,
+    opacity: 0,
   },
   menuColorOpen: {
     backgroundColor: "rgb(20 21 21)",
@@ -33,15 +35,15 @@ export default function AnimatedNav(props) {
         <div className="h-full flex justify-start items-center px-4">
           <a href="/">
             <img
-              src={logo.src}
+              src={props.logo}
               alt="Music's Most Wanted Logo"
               className="object-cover h-12"
             />
           </a>
         </div>
-        <div className="flex w-full h-full justify-end items-center">
+        <div className="flex border-box h-16 justify-end items-center">
           <button
-            className="aspect-square border-l-[0.1px] border-white h-full flex justify-center items-center select-none hover:cursor-pointer text-white font-display font-black"
+            className="aspect-square border-l-[0.1px] border-white flex h-full justify-center items-center select-none hover:cursor-pointer text-white font-display font-black"
             onClick={handleToggle}
           >
             {isOpen ? "X" : "MENU"}
@@ -55,11 +57,11 @@ export default function AnimatedNav(props) {
             animate={isOpen ? "open" : "closed"}
             variants={menuVariants}
             transition={{
-              duration: 0.5,
-              ease: [0.49, -0.01, 0.74, 1],
+              duration: 0.2,
+              // ease: [0.49, -0.01, 0.74, 1],
             }}
             exit={{
-              y: "-100%",
+              // y: "-100%",
               opacity: 0,
             }}
             className="w-full h-[calc(100svh-4rem)] fixed bottom-0 bg-bg/80 backdrop-blur-xl z-[100]"
