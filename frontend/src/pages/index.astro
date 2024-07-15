@@ -1,0 +1,18 @@
+---
+import HomeLayout from "../layouts/HomeLayout.astro";
+import { EmblaCarousel } from "../components/hero-carousel/HeroCarousel.jsx";
+import { sanityClient } from "sanity:client";
+
+const homeData = await sanityClient.fetch(`*[_type == "home"][0]`);
+
+// Extract the heroSlides array, handling the case where homeData might be null
+const homeSlides = homeData?.heroSlides || [];
+---
+
+<HomeLayout>
+  <section
+    class="w-screen h-[calc(100svh-4rem)] scroll-none overflow-hidden mt-16 bg-bg"
+  >
+    <EmblaCarousel client:load slides={homeSlides} />
+  </section>
+</HomeLayout>

@@ -1,0 +1,147 @@
+---
+import NavMenu from "../components/ui/NavMenu.astro";
+import { ViewTransitions, slide } from "astro:transitions";
+import { sanityClient } from "sanity:client";
+import { urlForImage } from "../lib/urlForImage";
+
+import "../css/main.css";
+
+import Footer from "../components/ui/Footer.astro";
+
+// get sanity site settings from sanity
+const siteSettings = await sanityClient.fetch(
+  `*[_type == "siteSettings"][0]{
+    ..., // Fetch all fields
+    logo, // Specifically fetch the logo field (assuming it's an image)
+    favicons {
+      ..., // Fetch all fields within favicons
+      "safariPinnedTab": safariPinnedTab.asset->url, // Get the direct asset URL for the SVG
+      "faviconIco": faviconIco.asset->url,
+      "browserconfigXml": browserconfigXml.asset->url,
+      "siteWebmanifest": siteWebmanifest.asset->url
+    }
+  }`
+);
+---
+
+<html lang="en" class="bg-bg">
+  <head>
+    <meta charset="utf-8" />
+    {
+      siteSettings?.favicons?.favicon16 && (
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href={urlForImage(siteSettings.favicons.favicon16).url()}
+        />
+      )
+    }
+    {
+      siteSettings?.favicons?.favicon32 && (
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href={urlForImage(siteSettings.favicons.favicon32).url()}
+        />
+      )
+    }
+    {
+      siteSettings?.favicons?.androidChrome192 && (
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="192x192"
+          href={urlForImage(siteSettings.favicons.androidChrome192).url()}
+        />
+      )
+    }
+    {
+      siteSettings?.favicons?.androidChrome512 && (
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="512x512"
+          href={urlForImage(siteSettings.favicons.androidChrome512).url()}
+        />
+      )
+    }
+    {
+      siteSettings?.favicons?.appleTouchIcon && (
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href={urlForImage(siteSettings.favicons.appleTouchIcon).url()}
+        />
+      )
+    }
+    {
+      siteSettings?.favicons?.mstile150 && (
+        <meta
+          name="msapplication-TileImage"
+          content={urlForImage(siteSettings.favicons.mstile150).url()}
+        />
+      )
+    }
+    {
+      siteSettings?.favicons?.safariPinnedTab && (
+        <link
+          rel="mask-icon"
+          href={siteSettings.favicons.safariPinnedTab}
+          color="#5bbad5"
+        />
+      )
+    }
+
+    {
+      siteSettings?.favicons?.faviconIco && (
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href={siteSettings.favicons.faviconIco}
+        />
+      )
+    }
+    {
+      siteSettings?.favicons?.browserconfigXml && (
+        <meta
+          name="msapplication-config"
+          content={siteSettings.favicons.browserconfigXml}
+        />
+      )
+    }
+    {
+      siteSettings?.favicons?.siteWebmanifest && (
+        <link rel="manifest" href={siteSettings.favicons.siteWebmanifest} />
+      )
+    }
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://ucarecdn.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/eqj7cde.css" />
+    <title>Music's Most Wanted</title>
+    <ViewTransitions transition:animate="fade" />
+  </head>
+  <body class="bg-bg">
+    <NavMenu logo={siteSettings.logo} />
+    <main class="w-screen bg-bg mt-16">
+      <slot />
+    </main>
+  </body>
+</html>

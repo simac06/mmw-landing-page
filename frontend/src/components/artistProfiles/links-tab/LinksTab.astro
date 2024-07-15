@@ -1,0 +1,23 @@
+---
+const { regularLinks, pinnedSongLink } = Astro.props;
+
+import RegularLink from "./RegularLink.astro";
+import PresaveLink from "./PresaveLink.astro";
+---
+
+<div
+  class="grid grid-cols-1 w-full lg:[&>*]:px-12 border-gray border-t-[1px] [&>*]:border-b-[1px] lg:border-t-[0px] lg:[&>*]:border-b-[0px] lg:[&>*:not(:last-child)]:border-b-[1px] [&>*]:border-gray"
+>
+  <!-- if there is a pinned song, display it -->
+  {pinnedSongLink && <PresaveLink data={pinnedSongLink} />}
+  <!-- <PresaveLink data={pinnedSongLink} /> -->
+
+  <!-- if there are regular links, map them -->
+
+  {
+    regularLinks &&
+      regularLinks.map((block) => {
+        return <RegularLink data={block} />;
+      })
+  }
+</div>

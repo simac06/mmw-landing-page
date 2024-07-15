@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* animate marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee2 {
+  animation: marquee2 30s linear infinite;
+}
+
+@keyframes marquee2 {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.marquee {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+  @apply font-satoshi;
+}
+
+.track {
+  white-space: nowrap;
+}
+
+.track > h1 {
+  text-transform: uppercase;
+}
+
+/*  Font Styling  */
+
+.page_title {
+  @apply font-obviously_title font-[600] text-3xl text-blue;
+}
+.subtitle {
+  @apply font-obviously_body font-[400] text-base tracking-wide text-white;
+}
+
+.text {
+  @apply font-obviously_body  tracking-wide text-white;
+}
+
+.title {
+  @apply font-obviously_title font-[600];
+}
+
+/*  Disallow scrolling on modal open  */
+
+body:has(dialog[open]) {
+  overflow: hidden;
+  position: fixed;
+}
+
+/* embla carousel */
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.embla__dots {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  gap: 0.25rem;
+}
+
+/* Artists Link Page */
+
+.pinned_song_button {
+  @apply text-white flex justify-center items-center h-5;
+}
+
+.pinned_song_button_more {
+  @apply text-white flex justify-center font-obviously_body items-center px-3 font-medium text-xs;
+}

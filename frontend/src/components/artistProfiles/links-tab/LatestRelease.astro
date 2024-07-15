@@ -1,0 +1,39 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section class="w-full px-4">
+  <div
+    class="flex flex-col gap-2 bg-[#0d0d0d] w-full rounded-xl border p-4 border-[#2d2d2d] relative"
+  >
+    <span class="text-md
+    uppercase"> Latest Release</span>
+    <div class="grid grid-cols-3 gap-4">
+      <div class="">
+        <img
+          src="https://ucarecdn.com/ca33b197-b310-4a0e-b304-cd6be5b101de/-/scale_crop/700x700/smart/"
+          alt=""
+          class="rounded-md"
+        />
+      </div>
+
+      <div class="col-span-2 w-full flex flex-col">
+        <div>
+          <h1 class="text-xl">Scaring The Hoes</h1>
+          <span class="text-sm uppercase">Single</span>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 right-0 p-4">
+      <!-- <button
+        class="text-sm font-medium bg-blue-400 px-4 py-1 flex gap-2 items-center rounded-full"
+      >
+        <Icon name="fa6-solid:play" class="" />
+        PLAY
+      </button> -->
+      <button class="w-full h-full text-4xl">
+        <Icon name="icon-park-solid:play" class="" />
+      </button>
+    </div>
+  </div>
+</section>

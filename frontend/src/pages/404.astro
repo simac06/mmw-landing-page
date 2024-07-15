@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionLayout from "../components/ui/SectionLayout.astro";
+---
+
+<BaseLayout>
+  <div class="h-[calc(100svh-4rem)] flex flex-col justify-center items-center">
+    <span class="title text-[10rem] tracking-[-0.1em] leading-[1.2] text-blue"
+      >404</span
+    >
+    <div class="flex flex-col items-center justify-center gap-6">
+      <span class="title text-5xl tracking-[-0.1em] text-white">COLD CASE</span>
+      <p class="text text-center">This page has vanished without a trace.</p>
+      <a
+        href="/"
+        class="lg:ml-2 text-blue md:text-lg font-obviously_body font-[500] text-base px-6 pb-1 md:px-8 md:pt-2 md:pb-3 bg-bg border-2 border-blue rounded-2xl"
+        ><p class="text">return to HQ</p></a
+      >
+    </div>
+  </div>
+</BaseLayout>

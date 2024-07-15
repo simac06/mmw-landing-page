@@ -1,0 +1,211 @@
+---
+import { Icon } from "astro-icon/components";
+import DiscographyTab from "./discography-tab/DiscographyTab.astro";
+import LinksTab from "./links-tab/LinksTab.astro";
+import PlayDialog from "./PlayDialog.astro";
+import { urlForImage } from "../../lib/urlForImage";
+import { Image } from "astro:assets";
+
+const { data } = Astro.props;
+
+const coverImage = urlForImage(data.image);
+
+const socialMedias = [
+  {
+    name: "Twitter",
+    icon: "fa6-brands:x-twitter",
+    url: "https://twitter.com/drago_1k",
+  },
+  {
+    name: "Instagram",
+    icon: "fa-brands:instagram",
+    url: "https://www.instagram.com/drago_1k/",
+  },
+  {
+    name: "TikTok",
+    icon: "fa-brands:tiktok",
+    url: "https://www.tiktok.com/@dragok",
+  },
+  {
+    name: "Youtube",
+    icon: "fa-brands:youtube",
+    url: "https://www.youtube.com/c/drago1k",
+  },
+];
+---
+
+<script>
+  // Tabs
+  const tabButtons = document.querySelectorAll(".tab");
+
+  function handleTabClick(event) {
+    tabButtons.forEach((button) => button.classList.remove("tabActive"));
+
+    event.currentTarget.classList.add("tabActive");
+
+    const clickedTabIndex = event.currentTarget.dataset.index;
+
+    const tabContents = document.querySelectorAll(".tabContent");
+
+    tabContents.forEach((content) =>
+      content.classList.remove("tabContentActive")
+    );
+
+    tabContents[clickedTabIndex].classList.add("tabContentActive");
+  }
+
+  tabButtons.forEach((button: HTMLButtonElement, index) => {
+    button.addEventListener("click", handleTabClick);
+    button.dataset.index = index.toString();
+  });
+</script>
+
+<main
+  class="flex flex-col lg:flex-row gap-4 lg:gap-0 mb-16 lg:mb-0 bg-bg text-white font-bold lg:min-h-[calc(100vh-4rem)]"
+>
+  <!-- Play Dialog -->
+  <PlayDialog
+    links={data.streamingLinks}
+    coverImage={coverImage.url()}
+    coverImageCaption={data.image.caption}
+    name={data.name}
+  />
+  <section
+    class="text-white flex items-center flex-col lg:w-1/2 h-full bg-blue"
+  >
+    <div class="flex flex-col items-center lg:items-start w-full">
+      <div class="relative flex w-full h-full">
+        <div
+          class="absolute h-full w-full bottom-0 bg-gradient-to-t from-bg lg:via-transparent to-transparent lg:from-10% lg:to-40%"
+        >
+        </div>
+        <Image
+          src={urlForImage(data.image)
+            .auto("format")
+            .width(720)
+            .height(820)
+            .fit("crop")
+            .crop("entropy")
+            .url()}
+          inferSize={true}
+          alt={data.image.caption}
+          class="object-cover w-full lg:hidden"
+        />
+
+        <Image
+          src={urlForImage(data.image)
+            .auto("format")
+            .width(720)
+            .height(820)
+            .fit("crop")
+            .crop("entropy")
+            .url()}
+          inferSize={true}
+          alt={data.image.caption}
+          class="object-cover w-full h-[calc(100vh-4rem)] hidden lg:block"
+        />
+        <div class="absolute bottom-0 px-4 lg:p-12 grid grid-cols-2 w-full">
+          <div class="flex flex-col lg:gap-2 justify-center">
+            <h1
+              class="text-4xl tracking-[-0.1em] text-blue lg:text-7xl leading-tight font-obviously_title font-[600] capitalize"
+            >
+              {data.name}
+            </h1>
+            <span
+              class="text-xl lg:text-2xl font-[500] tracking-wider text-white font-obviously_body"
+            >
+              @{data.handle}
+            </span>
+          </div>
+          <div class="flex justify-end w-full">
+            <button id="playBtn" class="text-6xl lg:text-6xl">
+              <Icon
+                name="icon-park-solid:play"
+                class="hover:text-blue transition-colors"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="border-l border-white hidden lg:block"></div>
+
+  <div class="flex items-center w-full justify-center lg:hidden px-4 py-4">
+    <div class="flex justify-center gap-6 w-full items-center">
+      {
+        socialMedias.map((socialMedia) => (
+          <a
+            href={socialMedia.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xl font-bold text-[#e8ddd3] hover:cursor-pointer hover:underline"
+          >
+            <Icon name={socialMedia.icon} />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <section
+    class="flex flex-col gap-4 w-full lg:gap-10 lg:w-1/2 lg:items-center"
+  >
+    <!-- <div
+      class="grid grid-flow-col rounded-full font-bold justify-items-stretch text-xs lg:text-lg p-1 border lg:border-2 border-gray shadow-md lg:w-5/6"
+    >
+      <button id="tabBtn" class="tab tabActive">
+        LINKS{" "}
+      </button>
+      <button id="tabBtn" class="tab">
+        MUSIC{" "}
+      </button>
+      <button id="tabBtn" class="tab">
+        BIO{" "}
+      </button>
+      <button id="tabBtn" class="tab">
+        EVENTS{" "}
+      </button>
+      <button id="tabBtn" class="tab">
+        SHOP{" "}
+      </button>
+    </div> -->
+
+    <div class="w-full">
+      <div id="tabContent" class="tabContent tabContentActive">
+        <LinksTab
+          regularLinks={data.stackedLinks}
+          pinnedSongLink={data.pinnedSongLink}
+        />
+      </div>
+      <div id="tabContent" class="tabContent">
+        <DiscographyTab />
+      </div>
+      <div id="tabContent" class="tabContent">EVENTS</div>
+      <div id="tabContent" class="tabContent">SHOP</div>
+    </div>
+  </section>
+</main>
+
+<style>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  .tab {
+    @apply py-2 rounded-full text-white text-center cursor-pointer tracking-wide;
+  }
+
+  .tabActive {
+    @apply bg-blue text-black;
+  }
+
+  .tabContent {
+    @apply hidden;
+  }
+
+  .tabContentActive {
+    @apply block;
+  }
+</style>

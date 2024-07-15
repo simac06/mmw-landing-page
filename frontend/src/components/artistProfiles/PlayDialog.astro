@@ -1,0 +1,168 @@
+---
+const { links, coverImage, name, coverImageCaption } = Astro.props;
+import { Icon } from "astro-icon/components";
+import { urlForImage } from "../../lib/urlForImage";
+import { Image } from "astro:assets";
+
+const musicPlatforms = [
+  {
+    name: "Spotify",
+    icon: "fa-brands:spotify",
+    url: links.spotify,
+  },
+  {
+    name: "Apple Music",
+    icon: "fa-brands:apple",
+    url: links.appleMusic,
+  },
+  {
+    name: "Youtube Music",
+    icon: "fa-brands:youtube",
+    url: links.youtubeMusic,
+  },
+  {
+    name: "Deezer",
+    icon: "fa-brands:deezer",
+    url: links.deezer,
+  },
+  {
+    name: "SoundCloud",
+    icon: "fa-brands:soundcloud",
+    url: links.soundCloud,
+  },
+  {
+    name: "Tidal",
+    icon: "simple-icons:tidal",
+    url: links.tidal,
+  },
+  {
+    name: "Amazon Music",
+    icon: "simple-icons:amazonmusic",
+    url: links.amazonMusic,
+  },
+  {
+    name: "Bandcamp",
+    icon: "fa-brands:bandcamp",
+    url: links.bandcamp,
+  },
+];
+// only show platforms that have a url
+let platformLinks = musicPlatforms.filter((link) => link.url);
+
+// how many platforms have links
+let numberOfLinks = platformLinks.length;
+---
+
+<dialog
+  id="playDialog"
+  class="w-full rounded-xl shadow-2xl font-obviously_body bg-bg"
+>
+  <div class="w-full bg-bg text-white flex flex-col gap-8 rounded-xl">
+    <span
+      id="closePlayDialog"
+      class="text-xl hover:cursor-pointer absolute top-4 right-4"
+      ><Icon name="fa6-solid:x" /></span
+    >
+
+    <div class="flex flex-col gap-6 items-center justify-center pt-8">
+      <div class="aspect-square">
+        <img
+          class="object-cover h-56 w-56 rounded-xl"
+          src={coverImage}
+          alt=`${name}'s profile photo`
+        />
+      </div>
+      <div class="flex flex-col gap-2 text-center">
+        <span
+          class="text-3xl tracking-[-0.1em] text-blue lg:text-7xl leading-tight font-obviously_title font-[600] capitalize"
+          >{name}</span
+        >
+      </div>
+    </div>
+
+    <div
+      class:list=`grid ${numberOfLinks > 5 ? "[&>*]:border-t-[1px] [&>*:nth-child(odd)]:border-r-[1px]" : "[&>*:not(:last-child)]:border-b-[1px]"} [&>*]:border-gray ${numberOfLinks > 5 ? "grid-cols-2" : "grid-cols-1"}`
+    >
+      {
+        platformLinks.map((platform) => (
+          <a href={platform.url} target="_blank" class="">
+            <div class="flex items-center gap-2 justify-center  py-5 bg-black">
+              <span class="text-3xl text-blue">
+                <Icon name={platform.icon} />
+              </span>
+
+              <span class="text-center font-obviously_body font-[500] text-base">
+                {platform.name}
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</dialog>
+
+<style>
+  #playDialog::backdrop {
+    @apply bg-bg/20 backdrop-blur-lg;
+  }
+</style>
+
+<script>
+  // Dialog
+  const playBtn = document.getElementById("playBtn");
+  const playDialog = document.getElementById("playDialog") as HTMLDialogElement;
+
+  const closePlayDialog = document.getElementById("closePlayDialog");
+
+  playBtn?.addEventListener("click", () => {
+    playDialog.showModal();
+  });
+  closePlayDialog?.addEventListener("click", () => {
+    playDialog.close();
+  });
+
+  playDialog.addEventListener("click", (event) => {
+    if (event.target === playDialog) {
+      playDialog.close();
+    }
+  });
+
+  let dialogOpen = false;
+
+  if (dialogOpen) {
+    playDialog.showModal();
+  } else {
+    playDialog.close();
+  }
+</script>
+
+<!-- <dialog
+  id="playDialog"
+  class="w-full rounded-xl shadow-2xl font-obviously_body bg-bg"
+>
+  <div class="w-full bg-bg text-white flex flex-col gap-8 rounded-xl">
+    <div class="flex items-center justify-between">
+      <span class="title">Play on your platform</span>
+      <span id="closePlayDialog" class="text-xl hover:cursor-pointer"
+        ><Icon name="fa6-solid:x" /></span
+      >
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 px-4">
+      {
+        musicPlatforms.map((platform) => (
+          <a href={platform.url} target="_blank">
+            <div class="flex items-center gap-2 justify-center rounded-xl flex-col px-4 py-2 bg-black w-38 h-28">
+              <span class="text-5xl text-blue">
+                <Icon name={platform.icon} />
+              </span>
+
+              <span class="text-center text-xs">{platform.name}</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</dialog> -->

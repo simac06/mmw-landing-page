@@ -1,0 +1,192 @@
+---
+const { data } = Astro.props;
+import { urlForImage } from "../../../lib/urlForImage";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import PlayDialog from "../PlayDialog.astro";
+
+let linksTemplate = [
+  {
+    platform: "Spotify",
+    icon: `https://ucarecdn.com/6ab47620-bef2-4d04-9b9b-2aba9471a86a/`,
+    dialogIcon: `fa-brands:spotify`,
+    url: data.pinned_urls.spotify,
+  },
+  {
+    platform: "Apple Music",
+    icon: `https://ucarecdn.com/1a6be01d-2341-460c-8443-519c52bcdc3c/`,
+    dialogIcon: `fa-brands:apple`,
+    url: data.pinned_urls.apple,
+  },
+  {
+    platform: "Youtube Music",
+    dialogIcon: "fa-brands:youtube",
+    url: data.pinned_urls.youtube,
+  },
+  {
+    platform: "Deezer",
+    dialogIcon: "fa-brands:deezer",
+    url: data.pinned_urls.deezer,
+  },
+  {
+    platform: "SoundCloud",
+    dialogIcon: "fa-brands:soundcloud",
+    url: data.pinned_urls.soundcloud,
+  },
+  {
+    platform: "Tidal",
+    dialogIcon: "simple-icons:tidal",
+    url: data.pinned_urls.tidal,
+  },
+  {
+    platform: "Amazon Music",
+    dialogIcon: "simple-icons:amazonmusic",
+    url: data.pinned_urls.amazon,
+  },
+  {
+    platform: "Bandcamp",
+    dialogIcon: "fa-brands:bandcamp",
+    url: data.pinned_urls.bandcamp,
+  },
+];
+// if linksTemplate url is empty, remove it from the object, and make a new object with the rest
+let links = linksTemplate.filter((link) => link.url);
+let numberOfLinks = links.length;
+---
+
+<PlayDialog links={data.pinned_urls} />
+
+<div
+  class="flex font-obviously_body flex-col items-center bg-bg w-full px-6 py-4 lg:py-10 lg:gap-4 gap-6 relative"
+>
+  <div class="w-full flex gap-6">
+    <div class="aspect-square h-28 lg:h-28">
+      <img class="rounded-md" src={urlForImage(data.image).url()} alt="" />
+    </div>
+
+    <div class="flex flex-col justify-around">
+      <div class="flex flex-col">
+        <span class="text-blue text-base font-[500] lg:text-2xl"
+          >{data.songTitle}</span
+        >
+        <span class="font-[300] text-sm text-white lg:text-lg"
+          >{data.songArtists}</span
+        >
+      </div>
+      <span
+        class="text-bg w-max text-[0.65rem] bg-blue pb-[0.125rem] px-3 rounded-full font-[500]"
+        >LATEST RELEASE</span
+      >
+    </div>
+  </div>
+  <div
+    id=""
+    class="grid grid-cols-3 [&>*:not(:last-child)]:border-r-[1px] border-[1px] border-gray [&>*]:border-gray bg-bg py-3 rounded-full text-white"
+  >
+    {
+      links.slice(0, 2).map((link) => (
+        <a href={link.url} target="_blank" class="pinned_song_button">
+          <Image
+            src={link.icon}
+            alt={link.platform}
+            inferSize
+            class="text-white h-[.9rem]"
+          />
+        </a>
+      ))
+    }
+    <button id="showMore" class="pinned_song_button_more align-bottom">
+      MORE
+    </button>
+  </div>
+
+  <Icon
+    name="mdi:pin"
+    class="text-lg lg:text-2xl rotate-[45deg] text-gray absolute top-0 right-0 m-4"
+  />
+</div>
+
+<!-- DIALOOOGGGG -->
+<dialog
+  id="moreDialog"
+  class="w-full rounded-xl shadow-2xl font-obviously_body bg-bg"
+>
+  <div class="w-full bg-bg text-white flex flex-col gap-8 rounded-xl">
+    <span
+      id="hideMore"
+      class="text-xl hover:cursor-pointer absolute top-4 right-4"
+      ><Icon name="fa6-solid:x" /></span
+    >
+
+    <div class="flex flex-col gap-6 items-center justify-center pt-8">
+      <Image
+        src={urlForImage(data.image).url()}
+        alt={data.image.caption}
+        inferSize
+        class="w-56 h-56 object-cover rounded-xl"
+      />
+      <div class="flex flex-col gap-2 text-center">
+        <span
+          class="text-3xl tracking-[-0.1em] text-blue lg:text-7xl leading-tight font-obviously_title font-[600] capitalize"
+          >{data.songTitle}</span
+        >
+        <span class="font-[300] text-base text-white">{data.songArtists}</span>
+      </div>
+    </div>
+
+    <div
+      class:list=`grid ${numberOfLinks > 5 ? "[&>*]:border-t-[1px] [&>*:nth-child(odd)]:border-r-[1px]" : "[&>*:not(:last-child)]:border-b-[1px]"} [&>*]:border-gray ${numberOfLinks > 5 ? "grid-cols-2" : "grid-cols-1"}`
+    >
+      {
+        links.map((link) => (
+          <a href={link.url} target="_blank" class="">
+            <div class="flex items-center gap-2 justify-center  py-5 bg-black">
+              <span class="text-3xl text-blue">
+                <Icon name={link.dialogIcon} />
+              </span>
+
+              <span class="text-center font-obviously_body font-[500] text-base">
+                {link.platform}
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</dialog>
+
+<style>
+  #moreDialog::backdrop {
+    @apply bg-bg/20 backdrop-blur-lg;
+  }
+</style>
+
+<script>
+  // Dialog
+  const moreBtn = document.getElementById("showMore");
+  const moreDialog = document.getElementById("moreDialog") as HTMLDialogElement;
+
+  const closeMoreDialog = document.getElementById("hideMore");
+
+  moreBtn?.addEventListener("click", () => {
+    moreDialog.showModal();
+  });
+  closeMoreDialog?.addEventListener("click", () => {
+    moreDialog.close();
+  });
+
+  moreDialog.addEventListener("click", (event) => {
+    if (event.target === moreDialog) {
+      moreDialog.close();
+    }
+  });
+
+  let moreDialogOpen = false;
+
+  if (moreDialogOpen) {
+    moreDialog.showModal();
+  } else {
+    moreDialog.close();
+  }
+</script>

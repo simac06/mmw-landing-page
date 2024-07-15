@@ -1,0 +1,25 @@
+---
+const { pageTitle, pageDescription } = Astro.props;
+
+import { sanityClient } from "sanity:client";
+import { urlForImage } from "../../lib/urlForImage";
+import { Image } from "astro:assets";
+---
+
+<section class="text-white flex flex-col min-h-screen">
+  <div
+    class="flex flex-col lg:gap-12 gap-4 justify-center lg:py-16 py-10 text-center items-center lg:mx-[3.98rem border-b-[0.1px]"
+  >
+    <h1 class="page_title text-3xl whitespace-nowrap md:text-8xl text-blue">
+      {pageTitle}
+    </h1>
+    <div
+      class="prose mx-auto lg:prose-lg !text-white font-obviously_body text-center"
+    >
+      <p class="text-white text-center lead text-base mx-4 whitespace-pre-line">
+        {pageDescription}
+      </p>
+    </div>
+  </div>
+  <slot />
+</section>

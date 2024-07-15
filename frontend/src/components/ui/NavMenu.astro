@@ -1,0 +1,52 @@
+---
+import AnimatedNav from "./AnimatedNav.jsx";
+import { Icon } from "astro-icon/components";
+import { urlForImage } from "../../lib/urlForImage";
+import { Image } from "astro:assets";
+
+const { logo } = Astro.props;
+
+const logoURL = urlForImage(logo).url();
+
+const pages = [
+  {
+    name: "Home",
+    slug: "",
+  },
+  {
+    name: "About",
+    slug: "about",
+  },
+  {
+    name: "Artists",
+    slug: "artists",
+  },
+  {
+    name: "Events",
+    slug: "events",
+  },
+  {
+    name: "Contact",
+    slug: "contact",
+  },
+];
+---
+
+<AnimatedNav client:load logo={logoURL}>
+  <div class="flex h-full font-display text-white select-none">
+    <div
+      class="flex
+        flex-col
+        w-full
+        items-center
+        uppercase
+        justify-center
+        gap-6
+        [&
+      >
+        *]:hover:cursor-pointer title text-4xl"
+    >
+      {pages.map((page) => <a href={`/${page.slug}`}>{page.name}</a>)}
+    </div>
+  </div>
+</AnimatedNav>

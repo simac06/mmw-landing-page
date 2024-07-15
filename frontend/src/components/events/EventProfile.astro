@@ -1,0 +1,171 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+const { frontmatter } = Astro.props;
+
+const socialMedias = [
+  {
+    name: "Twitter",
+    icon: "fa6-brands:x-twitter",
+    url: "https://twitter.com/drago_1k",
+  },
+  {
+    name: "Instagram",
+    icon: "fa-brands:instagram",
+    url: "https://www.instagram.com/drago_1k/",
+  },
+  {
+    name: "TikTok",
+    icon: "fa-brands:tiktok",
+    url: "https://www.tiktok.com/@dragok",
+  },
+  {
+    name: "Youtube",
+    icon: "fa-brands:youtube",
+    url: "https://www.youtube.com/c/drago1k",
+  },
+];
+---
+
+<main
+  class="flex flex-col lg:flex-row gap-4 lg:gap-0 mb-16 bg-bg font-display text-white font-bold lg:min-h-[calc(100vh-4rem)] relative min-h-[200vh]"
+>
+  <!-- Play Dialog -->
+
+  <section
+    class="text-white flex items-center flex-col lg:w-1/2 h-full bg-blue"
+  >
+    <div class="flex flex-col items-center lg:items-start w-full">
+      <div class="relative flex w-full h-full">
+        <div
+          class="absolute h-full w-full bottom-0 bg-gradient-to-t from-bg lg:via-transparent to-transparent lg:from-10% lg:to-40%"
+        >
+        </div>
+        <!-- <Image
+          src={concertPoster}
+          alt="concert poster"
+          class="object-cover lg:hidden"
+        />
+        <Image
+          src={concertPoster}
+          alt="concert poster"
+          class="object-cover w-full h-[calc(100vh-4rem)] hidden lg:block"
+        /> -->
+        <div class="absolute bottom-0 px-4 lg:p-12 w-full left-0 right-0">
+          <div class="flex flex-col justify-center gap-2">
+            <h1
+              class="text-2xl lg:text-7xl leading-[1] title uppercase text-blue"
+            >
+              CONCERT NAME
+            </h1>
+            <div
+              class="text-xl lg:text-lgxl font-bold tracking-wider subtitle flex gap-4"
+            >
+              <span class="flex gap-2 text-lg"
+                ><Icon name="fa6-solid:location-dot" />
+                Toronto, ON
+              </span>
+              <span class="flex gap-2 text-lg"
+                ><Icon name="fa6-solid:calendar" />
+                March 22
+              </span>
+            </div>
+            <div class="flex gap-2">
+              <span
+                class="bg-blue rounded-full px-4 py-1 tracking-wide text-xs text-black font-satoshi"
+                >AGES 19+</span
+              >
+              <span
+                class="bg-blue rounded-full px-4 py-1 tracking-wide text-xs text-black font-satoshi"
+                >HOSTED BY MMW</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="border-l border-white hidden lg:block"></div>
+
+  <section
+    class="flex flex-col gap-4 w-full px-4 lg:p-12 lg:gap-10 lg:w-1/2 lg:items-center"
+  >
+    <p class="text-sm font-normal tracking-wide">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa sequi
+      ducimus nisi porro quaerat quo magni esse quas? Modi eaque sapiente
+      debitis ea mollitia asperiores dolor totam architecto quod excepturi!
+    </p>
+  </section>
+
+  <!-- <section
+    class="flex flex-col gap-4 w-full px-4 lg:p-12 lg:gap-10 lg:w-1/2 lg:items-center mt-4"
+  >
+    <span class="title text-2xl">Location</span>
+    <div class="flex flex-col">
+      <span class="text-xl">ScotiaBank Arena</span>
+      <span>4190 Yonge Street Toronto, ON M2P 1N9</span>
+    </div>
+  </section> -->
+
+  <!-- <section
+    class="bg-black flex w-full flex-col justify-center items-center px-4 py-6 shadow-md fixed bottom-0 gap-6"
+  >
+    <span class="subtitle text-lg tracking-wide text-center text-white"
+      >Tickets starting at $87</span
+    >
+    <button
+      class="title text-xl tracking-widest bg-blue text-black py-3 w-full text-center"
+      >GET TICKETS</button
+    >
+  </section> -->
+</main>
+
+<style>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  .tab {
+    @apply py-2 rounded-full text-white text-center cursor-pointer tracking-wide;
+  }
+
+  .tabActive {
+    @apply bg-blue text-black;
+  }
+
+  .tabContent {
+    @apply hidden;
+  }
+
+  .tabContentActive {
+    @apply block;
+  }
+</style>
+
+<script>
+  // Tabs
+  const tabButtons = document.querySelectorAll(".tab");
+
+  function handleTabClick(event) {
+    tabButtons.forEach((button) => button.classList.remove("tabActive"));
+
+    event.currentTarget.classList.add("tabActive");
+
+    const clickedTabIndex = event.currentTarget.dataset.index;
+
+    const tabContents = document.querySelectorAll(".tabContent");
+
+    tabContents.forEach((content) =>
+      content.classList.remove("tabContentActive")
+    );
+
+    tabContents[clickedTabIndex].classList.add("tabContentActive");
+  }
+
+  tabButtons.forEach((button: HTMLButtonElement, index) => {
+    button.addEventListener("click", handleTabClick);
+    button.dataset.index = index.toString();
+  });
+</script>

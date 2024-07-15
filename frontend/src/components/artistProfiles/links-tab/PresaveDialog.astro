@@ -1,0 +1,119 @@
+---
+const { presaveUrls } = Astro.props;
+import { Icon } from "astro-icon/components";
+
+const musicPlatforms = [
+  {
+    platform: "Spotify",
+    icon: "fa-brands:spotify",
+    url: presaveUrls.spotify,
+  },
+  {
+    platform: "Apple Music",
+    icon: "fa-brands:apple",
+    url: presaveUrls.appleMusic,
+  },
+  {
+    platform: "Youtube Music",
+    icon: "fa-brands:youtube",
+    url: presaveUrls.youtubeMusic,
+  },
+  {
+    platform: "Deezer",
+    icon: "fa-brands:deezer",
+    url: presaveUrls.deezer,
+  },
+  {
+    platform: "SoundCloud",
+    icon: "fa-brands:soundcloud",
+    url: presaveUrls.soundCloud,
+  },
+  {
+    platform: "Tidal",
+    icon: "simple-icons:tidal",
+    url: presaveUrls.tidal,
+  },
+  {
+    platform: "Amazon Music",
+    icon: "simple-icons:amazonmusic",
+    url: presaveUrls.amazonMusic,
+  },
+  {
+    platform: "Bandcamp",
+    icon: "fa-brands:bandcamp",
+    url: presaveUrls.bandcamp,
+  },
+];
+---
+
+<dialog id="presaveDialog" class="w-full lg:w-1/2 rounded-xl shadow-2xl bg-bg">
+  <div
+    class="w-full bg-bg text-white p-8 font-display flex flex-col gap-8 rounded-xl"
+  >
+    <div class="flex items-center justify-between">
+      <span class="text-xl lg:text-2xl font-black"
+        >Presave on your platform</span
+      >
+      <span
+        id="closePresaveDialog"
+        class="text-xl lg:text-2xl hover:cursor-pointer"
+        ><Icon name="fa6-solid:x" /></span
+      >
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 lg:gap-8 px-4">
+      {
+        musicPlatforms.map((platforms) => (
+          <a href={platforms.url} target="_blank">
+            <div class="flex items-center gap-2 lg:gap-4 justify-center rounded-xl flex-col px-4 bg-black w-38 h-28 lg:h-auto lg:p-6">
+              <span class="text-5xl lg:text-7xl text-blue">
+                <Icon name={platforms.icon} />
+              </span>
+
+              <span class="text-center text-xs lg:text-xl">
+                {platforms.platform}
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</dialog>
+
+<style>
+  #presaveDialog::backdrop {
+    @apply bg-bg/20 backdrop-blur-lg;
+  }
+</style>
+
+<script>
+  // Dialog
+  const presaveBtn = document.getElementById("presaveBtn");
+  const presaveDialog = document.getElementById(
+    "presaveDialog"
+  ) as HTMLDialogElement;
+
+  const closePresaveDialog = document.getElementById("closePresaveDialog");
+
+  presaveBtn?.addEventListener("click", () => {
+    presaveDialog.showModal();
+  });
+  closePresaveDialog?.addEventListener("click", () => {
+    presaveDialog.close();
+  });
+
+  presaveDialog.addEventListener("click", (event) => {
+    if (event.target === presaveDialog) {
+      presaveDialog.close();
+    }
+  });
+
+  let dialogOpen = false;
+
+  if (dialogOpen) {
+    presaveDialog.showModal();
+  } else {
+    presaveDialog.close();
+  }
+</script>

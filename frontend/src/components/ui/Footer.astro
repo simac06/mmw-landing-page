@@ -1,0 +1,124 @@
+---
+import { Image } from "astro:assets";
+import { urlForImage } from "../../lib/urlForImage";
+import { Icon } from "astro-icon/components";
+
+const { logo } = Astro.props;
+
+const pages = [
+  {
+    name: "Home",
+    slug: "",
+  },
+  {
+    name: "About",
+    slug: "about",
+  },
+  {
+    name: "Artists",
+    slug: "artists",
+  },
+  {
+    name: "Events",
+    slug: "events",
+  },
+  {
+    name: "Contact",
+    slug: "contact",
+  },
+];
+
+const socials = [
+  {
+    name: "Twitter",
+    slug: "twitter",
+  },
+  {
+    name: "Instagram",
+    slug: "instagram",
+  },
+  {
+    name: "Facebook",
+    slug: "facebook",
+  },
+  {
+    name: "tiktok",
+    slug: "tiktok",
+  },
+  {
+    name: "Youtube",
+    slug: "youtube",
+  },
+];
+---
+
+<footer class="text-white flex flex-col bg-black border-white mt-20 ">
+  <div
+    class="grid lg:grid-cols-2 w-full h-full border-t-[0.1px] border-white lg:[&>*]:px-20  [&>*]:px-6 lg:[&>*]:py-16 [&>*]:py-12"
+  >
+    <div
+      class="flex w-full p-4 flex-col gap-6 lg:border-b-0 border-b-[0.1px] border-white"
+    >
+      <div class="flex lg:justify-start lg:items-start justify-center items center flex-col gap-4">
+        <h1
+          class="title whitespace-nowrap text-xl text-center lg:text-3xl lg:text-left text-blue"
+        >
+          JOIN THE MOVEMENT
+        </h1>
+
+        <p class="text-white text text-center lg:text-left text-sm lg:w-5/6">
+          Join our mailing list and discover the sounds of Music's Most Wanted
+          and be part of a musical revolution that's changing the game.
+        </p>
+      </div>
+
+      <div class="flex lg:justify-start w-full lg:items-start justify-center text-sm items-center lg:text-left lg:w-2/3 border-[0.1px] border-white">
+        <input
+          type="email"
+          placeholder="Email"
+          class="w-4/6 px-6 py-4 border-r-[0.1px] border-white rounded-none bg-bg"
+        />
+
+        <button
+          class="w-2/6 px-4 py-4 text-center border-white bg-bg"
+        >
+          Subscribe
+        </button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 h-full lg:border-l-[0.1px] text-white">
+      <div
+        class="flex
+        flex-col
+        uppercase
+        gap-6
+        [&
+      >
+        *]:hover:cursor-pointer
+        text-lg subtitle"
+      >
+        {pages.map((page) => <a href={`/${page.slug}`}>{page.name}</a>)}
+      </div>
+
+      <div class="flex flex-col w-full items-end justify-end gap-4 ">
+        <div class="flex items-end justify-end w-3/4 ">
+          <Image
+          src={urlForImage(logo).url()}
+          alt="logo"
+          inferSize
+          class="object-cover "
+          />
+        </div>
+            <ul class="flex lg:gap-8 gap-4 lg:text-2xl text-xl justify-end">
+      {socials.map((social) => <li><Icon name=`fa6-brands:${social.slug}` /></li>)}
+    </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <span class="w-full bg-black pb-2 pt-4 border-t-[0.1px] border-white">
+    <p class="text-center text-white">© Music's Most Wanted</p>
+  </span>
+</footer>
